@@ -1,0 +1,11 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /
+
+ip: 192.168.188.1
+port: 9999
+user:
+  id: 1001
+  name: 游久也
+  price: 9090
