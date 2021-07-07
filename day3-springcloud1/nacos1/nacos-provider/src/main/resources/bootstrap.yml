@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 7d7a5ab2-7bb9-489b-8349-4b454d3176e8
+        ext-config[0]:
+          group: provider
+          data-id: redis.properties
+          refresh: true
+        ext-config[1]:
+          data-id: jdbc.properties
+          refresh: true
+  application:
+    name: nacos-provider
