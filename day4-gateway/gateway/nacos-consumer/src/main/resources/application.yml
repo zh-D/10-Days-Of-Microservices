@@ -1,0 +1,10 @@
+myName: nacos
+server:
+  port: 18080
+spring:
+  application:
+    name: nacos-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.1:8848
