@@ -1,0 +1,15 @@
+myName: nacos
+server:
+  port: 18070
+spring:
+  zipkin:
+    base-url: http://192.168.80.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  application:
+    name: nacos-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.1:8848

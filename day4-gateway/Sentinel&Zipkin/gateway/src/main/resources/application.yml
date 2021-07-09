@@ -1,0 +1,19 @@
+server:
+  port: 18090
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: nacos-consumer
+          uri: http://127.0.0.1:18080
+          predicates:
+            - Path=/hi
+        - id: nacos-provider
+          uri: http://127.0.0.1:18070
+          predicates:
+            - Path=/hello
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+  application:
+    name: gateway

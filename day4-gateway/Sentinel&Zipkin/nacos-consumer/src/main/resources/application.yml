@@ -1,0 +1,35 @@
+myName: nacos
+server:
+  port: 18080
+spring:
+  zipkin:
+    base-url: http://192.168.80.1:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  application:
+    name: nacos-consumer
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 192.168.80.1:8080
+        port: 8719
+      datasource:
+        consumer:
+          nacos:
+            server-addr: 192.168.80.1:8848
+            dataId: ${spring.application.name}-sentinel-rules
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule_type: flow
+            discovery:
+              server-addr: 192.168.80.1:8848
+# 暴露/actuator/sentinel端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+feign:
+  sentinel:
+    enabled: true
