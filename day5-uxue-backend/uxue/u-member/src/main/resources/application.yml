@@ -1,0 +1,19 @@
+server:
+  port: 10002
+spring:
+  application:
+    name: u-member
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+  datasource:
+    url: jdbc:mysql://localhost:3306/uxue_ums?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
