@@ -1,0 +1,82 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+    gateway:
+      routes:
+        - id: weixin-context-route # 提供微信客户端调用的，用户微服务路由
+          uri: lb://u-context
+          predicates:
+            - Path=/context/**
+          filters:
+            - RewritePath=/(?<segment>.*),/$\{segment}
+            - JwtCheck
+        - id: weixin-question-route # 提供微信客户端调用的，题库微服务路由
+          uri: lb://u-question
+          predicates:
+            - Path=/question/**
+          filters:
+            - RewritePath=/(?<segment>.*),/$\{segment}
+            - JwtCheck
+        - id: weixin-login-ums-route # 提供微信客户端调用的，用户微服务路由
+          uri: lb://u-member
+          predicates:
+            - Path=/member/member/login/**
+          filters:
+            - RewritePath=/(?<segment>.*),/$\{segment}
+        - id: weixin-test-ums-route # 提供微信客户端调用的，用户微服务路由
+          uri: lb://u-member
+          predicates:
+            - Path=/member/member/refreshtoken/**
+          filters:
+            - RewritePath=/(?<segment>.*),/$\{segment}
+            - JwtCheck
+        - id: weixin-login-ums-route # 提供微信客户端调用的，用户微服务路由
+          uri: lb://u-member
+          predicates:
+            - Path=/member/member/login/**
+        - id: weixin-register-ums-route # 提供微信客户端调用的，用户微服务路由
+          uri: lb://u-member
+          predicates:
+            - Path=/member/member/save/**
+        - id: ums-route # 用户微服务路由
+          uri: lb://u-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        - id: cms-route # 广告微服务路由
+          uri: lb://u-context
+          predicates:
+            - Path=/api/context/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        - id: oss-route # oss服务路由
+          uri: lb://u-oss
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        - id: qms-route # ��Ŀ΢����·��
+          uri: lb://u-question
+          predicates:
+            - Path=/api/question/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        - id: ums-route # �û�΢����·��
+          uri: lb://u-member
+          predicates:
+            - Path=/member/**
+          filters:
+            - RewritePath=/(?<segment>.*),/$\{segment}
+        - id: renrenfast-route # 人人后台服务路由
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+  application:
+    name: gateway
