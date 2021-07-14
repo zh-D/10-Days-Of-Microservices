@@ -1,0 +1,9 @@
+<include src="../template/head.wxml" />
+<view class="cu-list menu sm-border solid-bottom card-menu margin-top" wx:for="{{items.list}}" wx:for-item="item">
+  <view class="cu-item ">
+    <view bindtap="getInfo" data-id="{{item.id}}" class="action text-bold text-black text-lg">
+      <text class="cuIcon-title text-blue"></text>
+      {{item.title}}
+    </view>
+  </view>
+</view>

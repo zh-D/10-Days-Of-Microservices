@@ -1,0 +1,14 @@
+<include src="../template/head.wxml" />
+<view class="news-detail-container">
+  <view class="author-time">
+    <text class="const-text">发表于</text>
+    <text class="time">{{ question.createTime }}</text>
+    <text class="const-text">评分:{{question.level}}</text>
+  </view>
+  <text class="title">{{ question.title }}</text>
+  <view class="tool">
+
+    <view class="horizon"></view>
+    <text class="detail">{{ question.answer }}</text>
+  </view>
+</view>
